@@ -28,13 +28,15 @@ for j = 1:nargin
  matlabFile = ['SAS_', num2str(subID), '.fhp.flp.s.cr.ref.mat'];
 
  %make a variable that stores the name of this subject's cell array data
- arrayData = load(matlabFile,'SAS*');
+ arrayDataStruct = load(matlabFile,'SAS_*');
+ varName = fieldnames(arrayDataStruct);
+ arrayData = arrayDataStruct.(varName{1});
  
  %the columns are in order: E0, EC.  Take the single columns and
  %assign a variable to them
  eyesOpenData = [arrayData{1,1}];
  eyesClosedData = [arrayData{1,2}];
-   
+ 
  %make file names for the single columns
  eyesOpenFileName = ['SAS_', num2str(subID), 'eo'];
  eyesClosedFileName = ['SAS_',num2str(subID),'ec'];
